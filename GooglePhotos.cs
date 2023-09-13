@@ -28,15 +28,15 @@ namespace PhotoOrganizerScripts {
         public GooglePhotos() {
             InputVariables = new List<Parameter> {
                 new Parameter {
-                    Id = Id.User, ObjectType = typeof (string), Label = "User", DefaultValue = "reidardmidtun@gmail.com",
+                    Id = Id.User, ObjectType = typeof (string), Label = "User", 
                     Description = "Input a user", Mandatory = true
                 },
                 new Parameter {
-                    Id = Id.ClientId, ObjectType = typeof (string), Label = "Client Id", DefaultValue = "858389142974-ams85ups1mivtsmr6bqjhlfa16g69jpk.apps.googleusercontent.com",
+                    Id = Id.ClientId, ObjectType = typeof (string), Label = "Client Id", 
                     Description = "Input a client id ", Mandatory = true
                 },
                 new Parameter {
-                    Id = Id.ClientSecret, ObjectType = typeof (string), Label = "Client Secret", DefaultValue = "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",
+                    Id = Id.ClientSecret, ObjectType = typeof (string), Label = "Client Secret",
                     Description = "Input a client secret ", Mandatory = true
                 },
                 new Parameter {
