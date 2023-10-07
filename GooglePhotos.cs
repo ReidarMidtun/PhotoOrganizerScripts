@@ -67,54 +67,50 @@ namespace PhotoOrganizerScripts {
             return playList != null ? playList.FileNames.ToHashSet() : new HashSet<string>();
         }
 
-        private async Task Synchronize(string user, string clientId,  string clientSecret, string playListName, ProgressIndicator progressIndicator, CancellationToken token) {
-
-            progressIndicator.Text = "Uploading images to Google Photos";
-
-            var service = await GetServiceAsync(user, clientId, clientSecret);
-            var album = await service.GetOrCreateAlbumAsync(playListName);
-            if (album is null) throw new Exception("album creation failed!");
-            var pathNames = GetPlaylistFileNames(playListName);
-            var fileNames = pathNames.Select(pn => Path.GetFileName(pn));
-            var toRemoveIds = new HashSet<string>();
-            var alreadyUploaded = new HashSet<string>();
-
-            await foreach (var item in service.GetMediaItemsByAlbumAsync(album.id)) {
-                if (item is null) continue;
-                alreadyUploaded.Add(item.filename);
-                if (!fileNames.Contains(item.filename)) { // If already uploaded not contained in the playlist => remove it
-                    toRemoveIds.Add(item.id);
-                }
-            }
-
-            if (toRemoveIds.Any()) {
-                var ok = await service.RemoveMediaItemsFromAlbumAsync(album.id, toRemoveIds.ToArray());
-                if (!ok) {
-                    LogView.AppendText($"Failed to remove items from the album.");
-                }
-            }
-            progressIndicator.Maximum = pathNames.Count();
+        private async Task Synchronize(string user, string clientId, string clientSecret, string playListName, ProgressIndicator progressIndicator, CancellationToken token) {
             try {
-                foreach (var pathName in pathNames) {
-                    var fileName = Path.GetFileName(pathName);
-                    if (!alreadyUploaded.Contains(fileName)) { // Upload if not already done
-                        var mediaItem = await service.UploadSingle(pathName, album.id);
-                        if (mediaItem != null) {
-                            LogView.AppendText($"Uploaded: {mediaItem.mediaItem.filename}");
-                        } else {
-                            LogView.AppendText($"Uploaded failed of: {fileName}");
-                        }
+                progressIndicator.Text = "Uploading images to Google Photos";
+                var service = await GetServiceAsync(user, clientId, clientSecret);
+                var album = await service.GetOrCreateAlbumAsync(playListName);
+                if (album is null) throw new Exception("album creation failed!");
+                var pathNames = GetPlaylistFileNames(playListName);
+                var fileNames = pathNames.Select(pn => Path.GetFileName(pn));
+                var toRemoveIds = new HashSet<string>();
+                var alreadyUploaded = new HashSet<string>();
+
+                await foreach (var item in service.GetMediaItemsByAlbumAsync(album.id)) {
+                    if (item is null) continue;
+                    alreadyUploaded.Add(item.filename);
+                    if (!fileNames.Contains(item.filename)) { // If already uploaded not contained in the playlist => remove it
+                        toRemoveIds.Add(item.id);
+                    }
+                }
+
+                if (toRemoveIds.Any()) {
+                    var ok = await service.RemoveMediaItemsFromAlbumAsync(album.id, toRemoveIds.ToArray());
+                    if (!ok) {
+                        LogView.AppendText($"Failed to remove items from the album.");
+                    }
+                }
+                var toUpload = pathNames.Where(pn => !alreadyUploaded.Contains(Path.GetFileName(pn))).ToList();
+                progressIndicator.Maximum = toUpload.Count();
+                foreach (var pathName in toUpload) {
+                    var mediaItem = await service.UploadSingle(pathName, album.id);
+                    if (mediaItem != null) {
+                        LogView.AppendText($"Uploaded: {mediaItem.mediaItem.filename}");
+                    } else {
+                        LogView.AppendText($"Uploaded failed for: {pathName}");
                     }
                     token.ThrowIfCancellationRequested();
                     progressIndicator.PerformStep();
-                } 
+                }
                 var message = $"Sucessfully uploaded {playListName} to google photos";
                 progressIndicator.Text = message;
                 progressIndicator.Reset();
                 LogView.AppendText(message);
             }
             catch (Exception ex) {
-                progressIndicator.Text = "Upload process cancelled.";
+                progressIndicator.Text = "Upload process failed or cancelled.";
                 progressIndicator.Reset();
             }
         } 
