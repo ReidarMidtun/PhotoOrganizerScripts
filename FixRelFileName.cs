@@ -21,6 +21,9 @@ namespace PhotoOrganizerScripts {
         }
 
         protected override object Execute() {
+            var config = DB.GetConfiguration();
+            config.Sources[1] = "C:\\Tmp\\TestBilder";
+            DB.Update(new List<DB.Configuration> { config });
             // Make a relative filename from the original absolute full file name
             //var config = DB.GetConfiguration();
             //var sources = config.Sources;
