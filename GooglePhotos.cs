@@ -48,7 +48,7 @@ namespace PhotoOrganizerScripts {
         }
 
         // This function is called after input is verified
-        protected override object Execute() {
+        protected override async Task<object> Execute() {
             var user = GetObject<string>(Id.User);
             var clientId = GetObject<string>(Id.ClientId);
             var clientSecret = GetObject<string>(Id.ClientSecret);

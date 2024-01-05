@@ -12,4 +12,10 @@
     <ProjectReference Include="..\PhotoOrganizer\PhotoOrganizer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="UserInputExample.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
 </Project>
