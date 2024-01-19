@@ -13,17 +13,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PhotoOrganizer.ScriptController {
-    class InCurrentPlayList : BaseScript, IFilter {
-        private HashSet<string> _validFileNames = new HashSet<string>();
-        public InCurrentPlayList() {
-            Description = "Check if the image is contained by the current selected playlist.";
+    class FileSize : BaseScript, IFilter {
+        public FileSize() {
+            Description = "Checks the file size of an image to be smaller than a given size.";
         }
         public void Initialize() {
-            var pl  = SelectedPlayList;
-            _validFileNames = pl != null ? pl.FileNames.ToHashSet() : new HashSet<string>();
         }
         public bool IsValid(DB.Image image) {
-            return _validFileNames.Contains(image.FileName);
+            var fi = new FileInfo(image.FileName);
+            return (fi.Length / 1000000) == 0; // If less than a MB
         }
     }
 }
