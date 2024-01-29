@@ -2,10 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>disable</ImplicitUsings>
+	<DefaultItemExcludes>$(DefaultItemExcludes);\**\*.html</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,9 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="UserInputExample.cs">
+    <Compile Update="NewScript.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Update="Scripts\UserInputExample.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Filters\Doc\" />
+    <Folder Include="Scripts\Doc\" />
   </ItemGroup>
 
 </Project>

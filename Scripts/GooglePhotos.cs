@@ -1,17 +1,14 @@
-﻿// css_ref System.Net.Primitives.dll, System.Linq.Expressions.dll
+// css_ref System.Net.Primitives.dll, System.Linq.Expressions.dll
 // https://github.com/f2calv/CasCap.Apis.GooglePhotos
 //
 
-// These are needed due to compiling outside VS (automatically added by VS)
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms; 
 
 using CasCap.Models;
 using CasCap.Services;
@@ -20,7 +17,7 @@ using Microsoft.Extensions.Options;
 using PhotoOrganizer;
 using PhotoOrganizer.ScriptController;
 using System.Net;
- 
+
 namespace PhotoOrganizerScripts {
     public class GooglePhotos : BaseScript {
         enum Id { User, ClientId, ClientSecret, PlayList };
@@ -40,26 +37,26 @@ namespace PhotoOrganizerScripts {
                     Description = "Input a client secret ", Mandatory = true
                 },
                 new Parameter {
-                    Id = Id.PlayList, ObjectType = typeof (string), Label = "Playlist", 
-                    Description = "Input a playlist name", Mandatory = true
+                    Id = Id.PlayList, ObjectType = typeof (DB.PlayList), Label = "Playlist", 
+                    Description = "Drop a playlist to select", Mandatory = true
                 }
             };
             Description = "Synchronizes a playlist and a Google Photos album of the same name. The process is done in the background. Visit https://console.cloud.google.com/apis/dashboard to get the authentication credentials, see https://github.com/f2calv/CasCap.Apis.GooglePhotos for a recipe.";
         }
 
         // This function is called after input is verified
-        protected override async Task<object> Execute() {
+        protected override async Task Execute() {
             var user = GetObject<string>(Id.User);
             var clientId = GetObject<string>(Id.ClientId);
             var clientSecret = GetObject<string>(Id.ClientSecret);
-            var playListName = GetObject<string>(Id.PlayList);
+            var playList = GetObject<DB.PlayList>(Id.PlayList);
             if (Main.CanStartBackgroundProcess) {
-                Main.BackgroundTask = Task.Run(() => Synchronize(user, clientId, clientSecret, playListName, Main.Progress, ProgressIndicator.Token));
+                Main.BackgroundTask = Task.Run(() => Synchronize(user, clientId, clientSecret, playList.Name, Main.Progress, ProgressIndicator.Token));
             }
             else {
                 LogView.AppendText("Wait until running process is finished or cancelled.");
             }
-            return null;
+            return;
         }
 
         private HashSet<string> GetPlaylistFileNames(string playListName) {
