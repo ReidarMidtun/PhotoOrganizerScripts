@@ -1,8 +1,10 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using PhotoOrganizer;
+using PhotoOrganizer.ScriptController;
 
-namespace PhotoOrganizer.ScriptController {
+namespace PhotoOrganizerScripts {
     class InCurrentPlayList : BaseScript, IFilter {
         private HashSet<string> _validFileNames = new HashSet<string>();
         public InCurrentPlayList() {

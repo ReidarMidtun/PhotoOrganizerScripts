@@ -1,6 +1,9 @@
 
 
-namespace PhotoOrganizer.ScriptController {
+using PhotoOrganizer;
+using PhotoOrganizer.ScriptController;
+
+namespace PhotoOrganizerScripts {
     class NFaces : BaseScript, IFilter {
         private const int NLimit = 5; // Tailor to your need
         public NFaces() {

@@ -1,6 +1,7 @@
 using System.IO;
-
-namespace PhotoOrganizer.ScriptController {
+using PhotoOrganizer;
+using PhotoOrganizer.ScriptController;
+namespace PhotoOrganizerScripts {
     class FileSize : BaseScript, IFilter {
         private const float MBLimit = 0.5f;
         private const float OneMB = 1000000.0f;
