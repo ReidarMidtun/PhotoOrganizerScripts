@@ -27,4 +27,8 @@
     <Folder Include="Scripts\Doc\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="13.6.0" />
+  </ItemGroup>
+
 </Project>

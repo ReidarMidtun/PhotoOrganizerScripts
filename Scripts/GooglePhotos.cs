@@ -1,7 +1,6 @@
 // css_ref System.Net.Primitives.dll, System.Linq.Expressions.dll
 // https://github.com/f2calv/CasCap.Apis.GooglePhotos
 //
-
 using System;
 using System.Collections.Generic;
 using System.IO;

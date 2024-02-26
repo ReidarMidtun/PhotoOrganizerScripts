@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using PhotoOrganizer;
+using PhotoOrganizer.ScriptController;
 
-namespace PhotoOrganizer.ScriptController {
+namespace PhotoOrganizerScripts {
     class SetDate : BaseScript {
         enum Id { InputMode, Date };
         private DateTime? _date;

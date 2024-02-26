@@ -1,5 +1,3 @@
-
-
 using PhotoOrganizer;
 using PhotoOrganizer.ScriptController;
 

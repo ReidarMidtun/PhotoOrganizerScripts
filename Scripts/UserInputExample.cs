@@ -1,12 +1,11 @@
-//
-// These are added by default when compiling from VisualStudio
-// When compiling manually it must be stated explicitly if in use.
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using PhotoOrganizer;
+using PhotoOrganizer.ScriptController;
 
-namespace PhotoOrganizer.ScriptController {
+namespace PhotoOrganizerScripts {
     class UserInputExample : BaseScript {
         // Used to address the explicit input when using generic functions
         // Tailor to your need
