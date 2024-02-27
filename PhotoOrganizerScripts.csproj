@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>disable</ImplicitUsings>
-	<DefaultItemExcludes>$(DefaultItemExcludes);\**\*.html;\**\*.css;\**\*.js</DefaultItemExcludes>
+	<DefaultItemExcludes>$(DefaultItemExcludes);*.html;\**\*.html;\**\*.css;\**\*.js</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
