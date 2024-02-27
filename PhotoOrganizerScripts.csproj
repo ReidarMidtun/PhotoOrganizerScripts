@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="Filters\Doc\" />
+    <Folder Include="Documentation\" />
     <Folder Include="Scripts\Doc\" />
   </ItemGroup>
 
