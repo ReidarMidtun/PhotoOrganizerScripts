@@ -100,7 +100,7 @@ namespace PhotoOrganizerScripts {
                 }
             }
             DB.Update(_updatedImages);
-            _deletedImages.ForEach(DB.Image.DeleteImageFiles);
+            _deletedImages.ForEach(im => DB.Image.DeleteImageFiles(im, false));
             DB.Delete(_deletedImages);
         }
     }
