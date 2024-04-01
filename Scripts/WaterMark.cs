@@ -56,11 +56,11 @@ namespace PhotoOrganizerScripts {
                 // Draw the watermark in the bottom right corner
                 image.Composite(_waterMark, Gravity.Southeast, CompositeOperator.Over);
 
+                // Or draw the watermark at a specific location
+                //image.Composite(_waterMark, 200, 50, CompositeOperator.Over);
+
                 // Optionally make the watermark more transparent
                 _waterMark.Evaluate(Channels.Alpha, EvaluateOperator.Divide, 4);
-
-                // Or draw the watermark at a specific location
-                image.Composite(_waterMark, 200, 50, CompositeOperator.Over);
 
                 // Save the result
                 var resultFile = Path.Combine(_outputFolder.FullName, Path.GetFileName(inputImage.FileName));
