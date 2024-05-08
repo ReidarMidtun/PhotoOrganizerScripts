@@ -64,11 +64,12 @@ namespace PhotoOrganizerScripts {
                     if (_ouputFolder == null) {
                         if (_NImages < 5) {
                             Display(resultingImage);
+                            _NImages++;
                         } else if (_NImages == 5) {
                             LogView.AppendText("Displaying only the 5 first.");
                             LogView.AppendText("Specify an output folder if you want to process more.");
+                            return false;
                         }
-                        _NImages++;
                     }
                 }
             }

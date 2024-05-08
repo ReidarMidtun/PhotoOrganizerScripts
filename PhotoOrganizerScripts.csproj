@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>disable</ImplicitUsings>
-	<DefaultItemExcludes>$(DefaultItemExcludes);*.html;\**\*.html;\**\*.css;\**\*.js</DefaultItemExcludes>
+	<DefaultItemExcludes>$(DefaultItemExcludes);*.xml;\**\*.xml;*.html;\**\*.html;\**\*.css;\**\*.js</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,6 +25,10 @@
   <ItemGroup>
     <Folder Include="Filters\Doc\" />
     <Folder Include="Scripts\Doc\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Filters\InPlayList.xml" />
   </ItemGroup>
 
   <ItemGroup>
