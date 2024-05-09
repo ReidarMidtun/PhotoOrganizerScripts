@@ -30,7 +30,7 @@ namespace PhotoOrganizerScripts {
             get { return _playList; }
             set {
                 _playList = value;
-                _validFileNames = _playList != null ? _playList.FileNames.ToHashSet() : new HashSet<string>();
+                _validFileNames = _playList != null ? _playList.GetFileNames().ToHashSet() : new HashSet<string>();
             }
         }
        

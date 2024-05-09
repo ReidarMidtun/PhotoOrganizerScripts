@@ -60,7 +60,7 @@ namespace PhotoOrganizerScripts {
 
         private HashSet<string> GetPlaylistFileNames(string playListName) {
             var playList = DB.GetPlayListCollection(DB.DataBase).FindOne(p => p.Name == playListName);
-            return playList != null ? playList.FileNames.ToHashSet() : new HashSet<string>();
+            return playList != null ? playList.GetFileNames().ToHashSet() : new HashSet<string>();
         }
 
         private async Task Synchronize(string user, string clientId, string clientSecret, string playListName, ProgressIndicator progressIndicator, CancellationToken token) {
