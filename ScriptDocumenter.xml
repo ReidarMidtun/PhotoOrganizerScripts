@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ScriptArguments xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <InputVariables>
-    <KeyValueElement>
-      <Key>SourceFolder</Key>
-      <Value>C:\Users\ThinkPad P50\source\repos\ReidarMidtun\PhotoOrganizerScripts\Scripts</Value>
-    </KeyValueElement>
-  </InputVariables>
-</ScriptArguments>

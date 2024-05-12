@@ -478,3 +478,4 @@ $RECYCLE.BIN/
 *.html
 *.js
 *.css
+/ScriptDocumenter.xml
