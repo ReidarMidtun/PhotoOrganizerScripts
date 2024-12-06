@@ -28,7 +28,7 @@ namespace PhotoOrganizerScripts {
             InputVariables = new List<Parameter> {
                 new Parameter {
                     Id = Id.InputMode, ObjectType = typeof (InputImages_e), Label = "Input mode",
-                    Description = "What images are to be processed", DefaultValue = InputImages_e.CurrentFolderFilteredImages, Mandatory = true
+                    Description = "What images are to be processed", DefaultValue = InputImages_e.CurrentFolderAndSubFoldersFiltered, Mandatory = true
                 },
                 new Parameter {
                     Id = Id.PlayList, ObjectType = typeof (DB.PlayList), Label = "Playlist",
