@@ -13,14 +13,6 @@
     <ProjectReference Include="..\PhotoOrganizer\PhotoOrganizer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="NewScript.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Update="Scripts\UserInputExample.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Filters\Doc\" />
@@ -28,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.2.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.4.0" />
   </ItemGroup>
 
 </Project>
