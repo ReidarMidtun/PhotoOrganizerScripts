@@ -479,3 +479,4 @@ $RECYCLE.BIN/
 *.js
 *.css
 /ScriptDocumenter.xml
+/Scripts/Backup.cs
