@@ -22,8 +22,8 @@ namespace PhotoOrganizerScripts {
         public FileConvert() {
             InputVariables = new List<Parameter> {
                 new Parameter {
-                    Id = Id.InputFolder, ObjectType = typeof (DirectoryInfo), Label = "Output folder",
-                    Description = "Select an output folder",Mandatory = true
+                    Id = Id.InputFolder, ObjectType = typeof (DirectoryInfo), Label = "Input folder",
+                    Description = "Select an input folder",Mandatory = true
                 },
                 new Parameter {
                     Id = Id.SubFolders, ObjectType = typeof (bool), Label = "Include sub folders",
