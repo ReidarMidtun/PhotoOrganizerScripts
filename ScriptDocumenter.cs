@@ -49,8 +49,8 @@ namespace CSharpScripting {
                 foreach (var csFile in sFolder.EnumerateFiles("*.cs").OrderBy(f => f.Name)) {
                     var className = Path.GetFileNameWithoutExtension(csFile.FullName);
                     string errors;
-
-                    Roslyn.Compiler.PreferredLibraryPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    var assembly = typeof(BaseScript).Assembly;
+                    Roslyn.Compiler.PreferredLibraryPath = Path.GetDirectoryName(assembly.Location);
                     var compileResult = Roslyn.Compiler.GetClassInstance(csFile, typeof(BaseScript), refDlls);
                     if (compileResult.ClassInstance == null) {
                         LogView.AppendText($"Error compiling: {csFile.FullName}");
