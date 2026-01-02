@@ -11,10 +11,16 @@ using PhotoOrganizer.ScriptController;
 
 namespace PhotoOrganizerScripts {
     class Cartoonizer : BaseScript {
-        enum Id { InputMode, OutputFolder };
+        enum Id { InputMode, Mode, OutputFolder };
    
         private DirectoryInfo _ouputFolder;
         private int _NImages = 0;
+        enum Mode_e {
+            celeba_distill,
+            face_paint_512_v1,
+            face_paint_512_v2,
+            paprika
+        }
 
         public Cartoonizer() {
             InputVariables = new List<Parameter> {
@@ -22,6 +28,10 @@ namespace PhotoOrganizerScripts {
                     Id = Id.InputMode, ObjectType = typeof (InputImages_e), Label = "Input mode",
                     Description = "What images are to be processed", 
                     DefaultValue = InputImages_e.SelectedImagesInThumbnailPanel, Mandatory = true
+                },
+                new Parameter {
+                    Id = Id.Mode, ObjectType = typeof (Mode_e), Label = "Mode",
+                    Description = "Cartonizer mode.", Mandatory = false
                 },
                 new Parameter {
                     Id = Id.OutputFolder, ObjectType = typeof (DirectoryInfo), Label = "Output folder",
@@ -52,6 +62,8 @@ namespace PhotoOrganizerScripts {
                 var request = new MultipartFormDataContent();
                 var image_data = fileInfo.OpenRead();
                 var content = new StreamContent(image_data);
+                var mode = GetObject<Mode_e>(Id.Mode);
+                request.Add(new StringContent(mode.ToString()), "model_name");
                 request.Add(content, "image", image.FileName);
                 var client = new HttpClient {
                     BaseAddress = new Uri($"http://localhost:{32168}/v1/"),
@@ -99,7 +111,7 @@ namespace PhotoOrganizerScripts {
 
  
         private async Task<string> Cartoonize(HttpClient client, MultipartFormDataContent request) {
-            using var httpResponse = await client.PostAsync("image/cartoonise", request);
+            using var httpResponse = await client.PostAsync("image/cartoonize", request);
             httpResponse.EnsureSuccessStatusCode();
             var response = await httpResponse.Content.ReadFromJsonAsync<ProcessImageResponse>();
             if (response != null && response.imageBase64 != null) {
