@@ -26,6 +26,9 @@ namespace PhotoOrganizerScripts {
 
         public bool IsValid(DB.Image image) {
             var fi = new FileInfo(image.FileName);
+            if (fi.Exists == false) {
+                return false;
+            }
             var mb = fi.Length / OneMB;
             return Compare(mb, MBLimit, CompareMode); 
         }
